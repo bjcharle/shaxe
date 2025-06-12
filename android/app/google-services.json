@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "921752310251",
+    "project_id": "shaxe-3bc6d",
+    "storage_bucket": "shaxe-3bc6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921752310251:android:af97175b06c03db0b189ae",
+        "android_client_info": {
+          "package_name": "com.example.shaxe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlWaG-0D_ZMKd-2Ip_gdW7m0V_PT4ag4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
