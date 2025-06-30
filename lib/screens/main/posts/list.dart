@@ -13,7 +13,7 @@ class _ListPostsState extends State<ListPosts> {
   
   @override
   Widget build(BuildContext context) {
-    final posts = Provider.of<List<PostModel>>(context) ?? [];
+    final posts = Provider.of<List<PostModel>>(context);
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) {

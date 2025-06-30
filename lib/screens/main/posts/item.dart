@@ -10,7 +10,7 @@ class ItemPost extends StatefulWidget {
   final AsyncSnapshot<bool> snapshotRetweet;
   final bool retweet;
 
-  ItemPost(this.post, this.snapshotUser, this.snapshotLike,
+  const ItemPost(this.post, this.snapshotUser, this.snapshotLike,
       this.snapshotRetweet, this.retweet,
       {Key? key})
       : super(key: key);
@@ -84,7 +84,7 @@ class _ItemPostState extends State<ItemPost> {
                                 size: 30.0),
                             onPressed: () => _postService.retweet(
                                 widget.post, widget.snapshotRetweet.data ?? false)),
-                        Text(widget.post.shares.toString())
+                        Text(widget.post.share.toString())
                       ],
                     ),
                     Row(
@@ -100,7 +100,7 @@ class _ItemPostState extends State<ItemPost> {
                               _postService.likePost(
                                   widget.post, widget.snapshotLike.data ?? false);
                             }),
-                        Text(widget.post.likes.toString())
+                        Text(widget.post.like.toString())
                       ],
                     )
                   ],

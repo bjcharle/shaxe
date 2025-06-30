@@ -31,7 +31,13 @@ class MyApp extends StatelessWidget {
   
         if (snapshot.connectionState == ConnectionState.done) {
           return StreamProvider<UserModel?>.value(
-            initialData: UserModel(),
+            initialData: UserModel(
+              uid: '',
+              bannerImageUrl: '',
+              profileImageUrl: '',
+              userName: '',
+              email: '',
+            ),
             value: AuthService().user,
             child: const MaterialApp(home: Wrapper()),
             );

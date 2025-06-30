@@ -1,5 +1,15 @@
 class UserModel {
-  final String? id;
+  final String uid;
+  final String bannerImageUrl;
+  final String profileImageUrl;
+  final String userName;
+  final String email;
 
-  UserModel({this.id});
+  UserModel({
+    required this.uid,
+    required this.bannerImageUrl,
+    required this.profileImageUrl,
+    required this.userName,
+    required this.email,
+  });
 }

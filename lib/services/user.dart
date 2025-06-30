@@ -1,37 +1,35 @@
 import 'dart:collection';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:twitter/models/user.dart';
-
-import 'package:twitter/services/utils.dart';
+import 'package:shaxe/models/user.dart';
+import 'package:shaxe/services/utils.dart';
 
 class UserService {
   UtilsService _utilsService = UtilsService();
 
   List<UserModel> _userListFromQuerySnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
+      final data = doc.data() as Map<String, dynamic>?;
       return UserModel(
-        id: doc.id,
-        name: doc.data()['name'] ?? '',
-        profileImageUrl: doc.data()['profileImageUrl'] ?? '',
-        bannerImageUrl: doc.data()['bannerImageUrl'] ?? '',
-        email: doc.data()['email'] ?? '',
+        uid: doc.id,
+        userName: data != null && data['name'] != null ? data['name'] : '',
+        profileImageUrl: data != null && data['profileImageUrl'] != null ? data['profileImageUrl'] : '',
+        bannerImageUrl: data != null && data['bannerImageUrl'] != null ? data['bannerImageUrl'] : '',
+        email: data != null && data['email'] != null ? data['email'] : '',
       );
     }).toList();
   }
 
   UserModel _userFromFirebaseSnapshot(DocumentSnapshot snapshot) {
-    return snapshot != null
-        ? UserModel(
-            id: snapshot.id,
-            name: snapshot.data()['name'] ?? '',
-            profileImageUrl: snapshot.data()['profileImageUrl'] ?? '',
-            bannerImageUrl: snapshot.data()['bannerImageUrl'] ?? '',
-            email: snapshot.data()['email'] ?? '',
-          )
-        : null;
+    final data = snapshot.data() as Map<String, dynamic>?;
+    return UserModel(
+      uid: snapshot.id,
+      userName: data != null && data['name'] != null ? data['name'] : '',
+      profileImageUrl: data != null && data['profileImageUrl'] != null ? data['profileImageUrl'] : '',
+      bannerImageUrl: data != null && data['bannerImageUrl'] != null ? data['bannerImageUrl'] : '',
+      email: data != null && data['email'] != null ? data['email'] : '',
+    );
   }
 
   Stream<UserModel> getUserInfo(uid) {
@@ -79,7 +77,7 @@ class UserService {
   Future<void> followUser(uid) async {
     await FirebaseFirestore.instance
         .collection('users')
-        .doc(FirebaseAuth.instance.currentUser.uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('following')
         .doc(uid)
         .set({});
@@ -88,14 +86,14 @@ class UserService {
         .collection('users')
         .doc(uid)
         .collection('followers')
-        .doc(FirebaseAuth.instance.currentUser.uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({});
   }
 
   Future<void> unfollowUser(uid) async {
     await FirebaseFirestore.instance
         .collection('users')
-        .doc(FirebaseAuth.instance.currentUser.uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('following')
         .doc(uid)
         .delete();
@@ -104,7 +102,7 @@ class UserService {
         .collection('users')
         .doc(uid)
         .collection('followers')
-        .doc(FirebaseAuth.instance.currentUser.uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .delete();
   }
 
@@ -115,11 +113,11 @@ class UserService {
 
     if (_bannerImage != null) {
       bannerImageUrl = await _utilsService.uploadFile(_bannerImage,
-          'user/profile/${FirebaseAuth.instance.currentUser.uid}/banner');
+          'user/profile/${FirebaseAuth.instance.currentUser!.uid}/banner');
     }
     if (_profileImage != null) {
       profileImageUrl = await _utilsService.uploadFile(_profileImage,
-          'user/profile/${FirebaseAuth.instance.currentUser.uid}/profile');
+          'user/profile/${FirebaseAuth.instance.currentUser!.uid}/profile');
     }
 
     Map<String, Object> data = new HashMap();
@@ -129,7 +127,7 @@ class UserService {
 
     await FirebaseFirestore.instance
         .collection('users')
-        .doc(FirebaseAuth.instance.currentUser.uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .update(data);
   }
 }

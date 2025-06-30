@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -44,9 +43,9 @@ class _EditState extends State<Edit> {
               onPressed: () async {
                 if (_profileImage != null && _bannerImage != null) {
                   await _userService.updateProfile(
-                    userName,
                     _profileImage!,
-                    bio,
+                    _bannerImage!,
+                    userName,
                   );
                   Navigator.pop(context);
                 } else {

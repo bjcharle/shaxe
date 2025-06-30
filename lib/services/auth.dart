@@ -7,7 +7,15 @@ class AuthService{
 
   
  UserModel? _userFromFirebaseUser(User? user){
-  return user != null ? UserModel(id: user.uid) : null;
+  return user != null
+      ? UserModel(
+          uid: user.uid,
+          userName: user.displayName ?? '',
+          email: user.email ?? '',
+          profileImageUrl: user.photoURL ?? '',
+          bannerImageUrl: '', // Provide a default or fetch from elsewhere
+        )
+      : null;
  }
  
 Stream<UserModel?> get user{

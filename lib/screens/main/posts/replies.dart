@@ -31,7 +31,7 @@ class _RepliesState extends State<Replies> {
             body: Container(
               child: Column(
                 children: [
-                  Expanded(child: ListPosts(args)),
+                  Expanded(child: ListPosts()),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     child: Column(
