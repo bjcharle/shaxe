@@ -12,8 +12,7 @@ class ItemPost extends StatefulWidget {
 
   const ItemPost(this.post, this.snapshotUser, this.snapshotLike,
       this.snapshotRetweet, this.retweet,
-      {Key? key})
-      : super(key: key);
+      {super.key});
 
   @override
   _ItemPostState createState() => _ItemPostState();
