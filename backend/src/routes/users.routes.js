@@ -215,24 +215,6 @@ router.post('/:userId/register-device', async (req, res) => {
       [userId, pushToken, platform]
     );
 
-// POST /api/users/:userId/register-device - register push notification token
-router.post('/:userId/register-device', async (req, res) => {
-  try {
-    const { userId } = req.params;
-    const { pushToken, platform = 'ios' } = req.body;
-
-    if (!pushToken) {
-      return res.status(400).json({ error: 'pushToken required' });
-    }
-
-    // Upsert device registration
-    await pool.query(
-      `INSERT INTO user_devices (user_id, push_token, platform)
-       VALUES ($1, $2, $3)
-       ON CONFLICT (user_id, push_token) DO UPDATE SET updated_at = NOW()`,
-      [userId, pushToken, platform]
-    );
-
     res.json({ success: true, message: 'Device registered' });
   } catch (error) {
     console.error('Register device error', error);
