@@ -4,6 +4,7 @@ const helmet = require('helmet');
 require('dotenv').config();
 
 const app = express();
+const runMigrations = require('./runMigrations');
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');
@@ -32,6 +33,10 @@ app.use('/api/reports', authenticateToken, require('./routes/reports.routes'));
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Shaxe backend running on port ${PORT}`);
+
+// Run migrations before starting server
+runMigrations().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Shaxe backend running on port ${PORT}`);
+  });
 });
