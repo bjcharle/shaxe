@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS shaxe_points (
   id SERIAL PRIMARY KEY,
   user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   balance INT DEFAULT 100,
+  purchased_balance INT DEFAULT 0,
   total_earned INT DEFAULT 100,
   total_spent INT DEFAULT 0,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -123,6 +124,7 @@ CREATE TABLE IF NOT EXISTS shaxe_point_transactions (
   to_user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   amount INT NOT NULL,
   transaction_type VARCHAR(20) NOT NULL, -- 'earned', 'purchase', 'transfer', 'shield'
+  metadata JSONB,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

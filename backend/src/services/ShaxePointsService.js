@@ -60,8 +60,12 @@ class ShaxePointsService {
 
   static async transferPoints(fromUserId, toUserId, amount) {
     const senderBalance = await this.getBalance(fromUserId);
-    if (senderBalance.balance < amount) {
-      throw new Error('Insufficient shaxe points');
+    
+    // Check if user has enough earned (non-purchased) points
+    const earnedBalance = senderBalance.balance - (senderBalance.purchased_balance || 0);
+    
+    if (earnedBalance < amount) {
+      throw new Error('Insufficient transferable points. Purchased points cannot be transferred.');
     }
 
     await pool.query(
@@ -77,6 +81,19 @@ class ShaxePointsService {
     await pool.query(
       'INSERT INTO shaxe_point_transactions (from_user_id, to_user_id, amount, transaction_type) VALUES ($1, $2, $3, $4)',
       [fromUserId, toUserId, amount, 'transfer']
+    );
+  }
+
+  static async purchasePoints(userId, amount, paymentMethod) {
+    // Add purchased points to both balance and purchased_balance
+    await pool.query(
+      'UPDATE shaxe_points SET balance = balance + $1, purchased_balance = purchased_balance + $1 WHERE user_id = $2',
+      [amount, userId]
+    );
+
+    await pool.query(
+      'INSERT INTO shaxe_point_transactions (to_user_id, amount, transaction_type, metadata) VALUES ($1, $2, $3, $4)',
+      [userId, amount, 'purchase', JSON.stringify({ payment_method: paymentMethod })]
     );
   }
 }
