@@ -1,4 +1,4 @@
-# Frontend Dockerfile for Railway
+# Frontend Dockerfile for Railway - Production build
 
 FROM node:18-alpine AS build
 
