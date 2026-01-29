@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import '../styles/pages.css';
 
 export default function Profile() {
@@ -17,8 +17,16 @@ export default function Profile() {
         <div className="profile-info">
           <h3>{user.username}</h3>
           <p>Email: {user.email}</p>
-          <p>Role: {user.role}</p>
-          <p>KYC Status: {user.kyc_verified ? 'Verified' : 'Pending'}</p>
+          <p>Verification Status: {user.is_verified ? '✅ Verified' : '❌ Not Verified'}</p>
+          
+          {!user.is_verified && (
+            <div className="verification-prompt">
+              <p>Get verified to unlock all features!</p>
+              <Link to="/kyc-verification" className="btn-primary">
+                Get Verified
+              </Link>
+            </div>
+          )}
         </div>
         {/* TODO: Add profile editing functionality */}
         <div className="placeholder">

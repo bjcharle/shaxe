@@ -42,8 +42,8 @@ export default function KYCVerification() {
       // TODO: Implement KYC verification API call
       console.log('KYC data:', formData);
 
-      // For now, just navigate to home
-      navigate('/home');
+      // Navigate to profile to complete user information
+      navigate('/profile');
     } catch (error) {
       setError('Verification submission failed');
     } finally {

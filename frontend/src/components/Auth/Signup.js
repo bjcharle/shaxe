@@ -44,7 +44,7 @@ export default function Signup() {
     );
 
     if (result.success) {
-      navigate('/kyc-verification');
+      navigate('/profile');
     } else {
       setError(result.error || 'Signup failed');
     }
