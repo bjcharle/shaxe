@@ -45,6 +45,39 @@ export default function Home() {
     }
   };
 
+  const handleEngagement = async (postId, action) => {
+    try {
+      switch (action) {
+        case 'like':
+          await postsService.likePost(postId);
+          break;
+        case 'dislike':
+          await postsService.dislikePost(postId);
+          break;
+        case 'share':
+          await postsService.sharePost(postId);
+          break;
+        case 'bookmark':
+          await postsService.bookmarkPost(postId);
+          break;
+        case 'shame':
+          await postsService.shamePost(postId);
+          break;
+        default:
+          return;
+      }
+      // Refresh feed to show updated counts
+      fetchPosts();
+    } catch (err) {
+      console.error(`Error ${action}ing post:`, err);
+      if (err.response?.status === 403) {
+        setError('Only verified users can engage with posts');
+      } else {
+        setError(`Failed to ${action} post`);
+      }
+    }
+  };
+
   if (!user) {
     return (
       <div className="page-container">
@@ -135,11 +168,22 @@ export default function Home() {
                   <p>{post.content}</p>
                 </div>
                 <div className="post-actions">
-                  <button title="Like">❤️ {post.engagement?.likes || 0}</button>
-                  <button title="Dislike">👎 {post.engagement?.dislikes || 0}</button>
+                  <button onClick={() => handleEngagement(post.id, 'like')} title="Like">
+                    ❤️ {post.engagement?.likes || 0}
+                  </button>
+                  <button onClick={() => handleEngagement(post.id, 'dislike')} title="Dislike">
+                    👎 {post.engagement?.dislikes || 0}
+                  </button>
+                  <button onClick={() => handleEngagement(post.id, 'share')} title="Share">
+                    🔄 {post.engagement?.shares || 0}
+                  </button>
+                  <button onClick={() => handleEngagement(post.id, 'shame')} title="Shame">
+                    😳 {post.engagement?.shames || 0}
+                  </button>
                   <button title="Comment">💬 {post.comments || 0}</button>
-                  <button title="Share">🔄 {post.engagement?.shares || 0}</button>
-                  <button title="Bookmark">🔖</button>
+                  <button onClick={() => handleEngagement(post.id, 'bookmark')} title="Bookmark">
+                    🔖
+                  </button>
                 </div>
               </div>
             ))

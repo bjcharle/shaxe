@@ -52,5 +52,10 @@ export const postsService = {
   async bookmarkPost(postId) {
     const response = await api.post(`/engagement/bookmark/${postId}`);
     return response.data;
+  },
+
+  async shamePost(postId) {
+    const response = await api.post(`/engagement/shame/${postId}`);
+    return response.data;
   }
 };
