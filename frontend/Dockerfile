@@ -4,6 +4,12 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
+# Declare build arguments for React environment variables
+ARG REACT_APP_API_URL
+ARG REACT_APP_ENV
+ARG REACT_APP_ENABLE_MOCK_KYC
+ARG REACT_APP_ENABLE_DEBUG
+
 # Copy package files (relative to frontend/ root)
 COPY package*.json ./
 
@@ -14,7 +20,7 @@ RUN npm install
 COPY src ./src
 COPY public ./public
 
-# Build React app
+# Build React app with environment variables
 RUN npm run build
 
 # Production stage
