@@ -106,7 +106,7 @@ router.get('/feed', async (req, res) => {
 
     // Filter out ignored users if logged in
     if (userId) {
-      query += ` AND u.id NOT IN (SELECT ignored_user_id FROM user_ignores WHERE user_id = $${5})`;
+      query += ` AND u.id NOT IN (SELECT ignored_user_id FROM user_ignores WHERE user_id = $3)`;
     }
 
     query += ` GROUP BY p.id, p.user_id, p.content, p.is_adult_content, p.is_shielded, p.shield_expires_at, p.created_at, u.username, u.is_verified, tc.trending_score`;
@@ -117,9 +117,9 @@ router.get('/feed', async (req, res) => {
       query += ` ORDER BY p.created_at DESC`;
     }
 
-    query += ` LIMIT $${userId ? 3 : 1} OFFSET $${userId ? 4 : 2}`;
+    query += ` LIMIT $1 OFFSET $2`;
 
-    const params = userId ? [limit, offset, limit, offset, userId] : [limit, offset];
+    const params = userId ? [limit, offset, userId] : [limit, offset];
     const result = await pool.query(query, params);
 
     res.json({
