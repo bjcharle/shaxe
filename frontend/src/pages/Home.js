@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import { postsService } from '../services/posts';
 import '../styles/pages.css';
 
 export default function Home() {
@@ -8,19 +9,40 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState('');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (user) {
-      // TODO: Fetch trending posts from API
-      setLoading(false);
+      fetchPosts();
     }
   }, [user]);
 
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const data = await postsService.getFeed();
+      setPosts(data.posts || []);
+    } catch (err) {
+      console.error('Error fetching posts:', err);
+      setError('Failed to load posts');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handlePostSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Submit post to API
-    console.log('Post:', newPost);
-    setNewPost('');
+    if (!newPost.trim()) return;
+
+    try {
+      await postsService.createPost(newPost);
+      setNewPost('');
+      // Refresh feed
+      fetchPosts();
+    } catch (err) {
+      console.error('Error creating post:', err);
+      setError('Failed to create post');
+    }
   };
 
   if (!user) {
@@ -84,6 +106,7 @@ export default function Home() {
 
         {/* Posts Feed */}
         <div className="posts-list">
+          {error && <div className="error-message">{error}</div>}
           {loading ? (
             <div className="loading">Loading posts...</div>
           ) : posts.length === 0 ? (
@@ -94,7 +117,30 @@ export default function Home() {
           ) : (
             posts.map(post => (
               <div key={post.id} className="post-item">
-                {/* Post content will go here */}
+                <div className="post-header">
+                  <div className="post-avatar">
+                    {post.username ? post.username[0].toUpperCase() : 'U'}
+                  </div>
+                  <div className="post-meta">
+                    <Link to={`/profile/${post.username}`} className="post-username">
+                      @{post.username}
+                    </Link>
+                    {post.is_verified && <span className="verified-badge">✓</span>}
+                    <span className="post-time">
+                      · {new Date(post.created_at).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+                <div className="post-content">
+                  <p>{post.content}</p>
+                </div>
+                <div className="post-actions">
+                  <button title="Like">❤️ {post.likes || 0}</button>
+                  <button title="Dislike">👎 {post.dislikes || 0}</button>
+                  <button title="Comment">💬 {post.comments || 0}</button>
+                  <button title="Share">🔄 {post.shares || 0}</button>
+                  <button title="Bookmark">🔖</button>
+                </div>
               </div>
             ))
           )}
