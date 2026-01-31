@@ -181,7 +181,7 @@ export default function Home() {
                       onClick={() => setShowShareMenu(showShareMenu === post.id ? null : post.id)}
                       title="Share or Shame"
                     >
-                      <span className="share-icon">→ S ←</span>
+                      <img src="/images/shaxe-icon.png" alt="Share/Shame" className="share-icon-img" />
                       <span className="share-count">
                         {(post.engagement?.shares || 0) + (post.engagement?.shames || 0)}
                       </span>

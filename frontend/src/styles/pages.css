@@ -484,10 +484,11 @@
   box-shadow: 0 4px 8px rgba(163, 44, 196, 0.3);
 }
 
-.share-icon {
-  font-weight: 900;
-  font-size: 16px;
-  letter-spacing: 2px;
+.share-icon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .share-count {
