@@ -12,6 +12,7 @@ RUN npm install --omit=dev
 
 # Copy application code
 COPY src ./src
+COPY migrations ./migrations
 
 # Expose port
 EXPOSE 5000
