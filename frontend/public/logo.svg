@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#A32CC4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Purple S Letter -->
+  <path d="M 150 40 L 150 30 L 50 30 L 50 85 L 140 85 L 140 115 L 50 115 L 50 125 L 150 125 L 150 70 L 60 70 L 60 40 Z" 
+        fill="url(#purpleGrad)" 
+        stroke="url(#purpleGrad)" 
+        stroke-width="8"/>
+</svg>

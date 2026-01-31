@@ -10,6 +10,7 @@ export default function Home() {
   const [newPost, setNewPost] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [showShameShareMenu, setShowShameShareMenu] = useState(null);
 
   useEffect(() => {
     if (user) {
@@ -174,12 +175,40 @@ export default function Home() {
                   <button onClick={() => handleEngagement(post.id, 'dislike')} title="Dislike">
                     👎 {post.engagement?.dislikes || 0}
                   </button>
-                  <button onClick={() => handleEngagement(post.id, 'share')} title="Share">
-                    🔄 {post.engagement?.shares || 0}
-                  </button>
-                  <button onClick={() => handleEngagement(post.id, 'shame')} title="Shame">
-                    😳 {post.engagement?.shames || 0}
-                  </button>
+                  <div className="shame-share-container">
+                    <button 
+                      onClick={() => setShowShameShareMenu(showShameShareMenu === post.id ? null : post.id)} 
+                      className="shame-share-btn"
+                      title="Shame or Share"
+                    >
+                      <span className="s-icon">S</span>
+                      <span className="counts">
+                        {(post.engagement?.shares || 0) + (post.engagement?.shames || 0)}
+                      </span>
+                    </button>
+                    {showShameShareMenu === post.id && (
+                      <div className="shame-share-menu">
+                        <button 
+                          onClick={() => {
+                            handleEngagement(post.id, 'share');
+                            setShowShameShareMenu(null);
+                          }}
+                          className="menu-item share-item"
+                        >
+                          🔄 Share ({post.engagement?.shares || 0})
+                        </button>
+                        <button 
+                          onClick={() => {
+                            handleEngagement(post.id, 'shame');
+                            setShowShameShareMenu(null);
+                          }}
+                          className="menu-item shame-item"
+                        >
+                          😳 Shame ({post.engagement?.shames || 0})
+                        </button>
+                      </div>
+                    )}
+                  </div>
                   <button title="Comment">💬 {post.comments || 0}</button>
                   <button onClick={() => handleEngagement(post.id, 'bookmark')} title="Bookmark">
                     🔖
