@@ -19,6 +19,15 @@ async function runMigrations() {
     
     if (checkTable.rows[0].exists) {
       console.log('⚠️ Tables already exist - skipping migration');
+      
+      // List all tables for verification
+      const allTables = await client.query(`
+        SELECT table_name 
+        FROM information_schema.tables 
+        WHERE table_schema = 'public' 
+        ORDER BY table_name;
+      `);
+      console.log('📋 Existing tables:', allTables.rows.map(r => r.table_name).join(', '));
       return;
     }
     
