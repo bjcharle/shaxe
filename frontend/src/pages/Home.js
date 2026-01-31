@@ -181,7 +181,7 @@ export default function Home() {
                       className="shame-share-btn"
                       title="Shame or Share"
                     >
-                      <span className="s-icon">S</span>
+                      <span className="s-arrows">→ S ←</span>
                       <span className="counts">
                         {(post.engagement?.shares || 0) + (post.engagement?.shames || 0)}
                       </span>

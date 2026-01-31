@@ -483,6 +483,20 @@
   font-family: 'Arial Black', sans-serif;
 }
 
+.shame-share-btn .s-arrows {
+  font-weight: 900;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: linear-gradient(135deg, #A32CC4 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'Arial Black', sans-serif;
+  letter-spacing: 1px;
+}
+
 .shame-share-btn .counts {
   font-weight: 600;
   color: #64748b;
