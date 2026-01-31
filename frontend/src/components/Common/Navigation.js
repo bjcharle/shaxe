@@ -16,7 +16,9 @@ export default function Navigation() {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/home" className="nav-logo">
-          <span className="logo-text">Shaxe</span>
+          <span className="logo-text">
+            <img src="/images/shaxe-icon.png" alt="S" className="logo-icon" />haxe
+          </span>
         </Link>
 
         <div className="nav-links">
