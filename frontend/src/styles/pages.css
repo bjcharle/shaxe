@@ -449,103 +449,6 @@
   background: #e2e8f0;
 }
 
-/* Shame/Share Button Styles */
-.shame-share-container {
-  position: relative;
-  display: inline-block;
-}
-
-.shame-share-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  transition: all 0.2s;
-  font-size: 14px;
-  color: #64748b;
-}
-
-.shame-share-btn:hover {
-  background: #f1f5f9;
-}
-
-.shame-share-btn .s-icon {
-  font-weight: 900;
-  font-size: 18px;
-  background: linear-gradient(135deg, #A32CC4 0%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-family: 'Arial Black', sans-serif;
-}
-
-.shame-share-btn .s-arrows {
-  font-weight: 900;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  background: linear-gradient(135deg, #A32CC4 0%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-family: 'Arial Black', sans-serif;
-  letter-spacing: 1px;
-}
-
-.shame-share-btn .counts {
-  font-weight: 600;
-  color: #64748b;
-}
-
-.shame-share-menu {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 8px;
-  min-width: 180px;
-  z-index: 10;
-  overflow: hidden;
-}
-
-.shame-share-menu .menu-item {
-  width: 100%;
-  padding: 12px 16px;
-  border: none;
-  background: white;
-  cursor: pointer;
-  text-align: left;
-  font-size: 14px;
-  transition: background 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #1e293b;
-  font-weight: 500;
-}
-
-.shame-share-menu .menu-item:hover {
-  background: #f8fafc;
-}
-
-.shame-share-menu .share-item:hover {
-  background: #dbeafe;
-  color: #1d4ed8;
-}
-
-.shame-share-menu .shame-item:hover {
-  background: #fef2f2;
-  color: #dc2626;
-}
-
 @media (max-width: 1024px) {
   .home-layout {
     grid-template-columns: 1fr;
@@ -554,4 +457,76 @@
   .sidebar-right {
     display: none;
   }
+}
+/* Share/Shame Button Styles */
+.share-shame-container {
+  position: relative;
+  display: inline-block;
+}
+
+.share-shame-button {
+  background: linear-gradient(135deg, #A32CC4 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(163, 44, 196, 0.2);
+}
+
+.share-shame-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(163, 44, 196, 0.3);
+}
+
+.share-icon {
+  font-weight: 900;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.share-count {
+  font-size: 14px;
+}
+
+.share-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0;
+  z-index: 100;
+  min-width: 160px;
+  overflow: hidden;
+}
+
+.share-menu button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: white;
+  color: #1e293b;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+  text-align: left;
+}
+
+.share-menu button:hover {
+  background: #f1f5f9;
+}
+
+.share-menu button:not(:last-child) {
+  border-bottom: 1px solid #e2e8f0;
 }
