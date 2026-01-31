@@ -458,6 +458,38 @@
     display: none;
   }
 }
+
+/* Engagement Button Styles */
+.engagement-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.engagement-btn:hover {
+  background: #f1f5f9;
+  color: #A32CC4;
+}
+
+.engagement-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(10%) saturate(500%) hue-rotate(180deg);
+}
+
+.engagement-btn:hover .engagement-icon {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(95%) saturate(2456%) hue-rotate(282deg) brightness(91%) contrast(93%);
+}
+
 /* Share/Shame Button Styles */
 .share-shame-container {
   position: relative;
@@ -530,4 +562,34 @@
 
 .share-menu button:not(:last-child) {
   border-bottom: 1px solid #e2e8f0;
+}
+
+.menu-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.engagement-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  color: #1e293b;
+  font-size: 14px;
+}
+
+.engagement-btn:hover {
+  background: #f1f5f9;
+}
+
+.engagement-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }

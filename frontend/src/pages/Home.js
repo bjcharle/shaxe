@@ -169,11 +169,13 @@ export default function Home() {
                   <p>{post.content}</p>
                 </div>
                 <div className="post-actions">
-                  <button onClick={() => handleEngagement(post.id, 'like')} title="Like">
-                    ❤️ {post.engagement?.likes || 0}
+                  <button onClick={() => handleEngagement(post.id, 'like')} title="Like" className="engagement-btn">
+                    <img src="/images/shaxe-like.png" alt="Like" className="engagement-icon" />
+                    <span>{post.engagement?.likes || 0}</span>
                   </button>
-                  <button onClick={() => handleEngagement(post.id, 'dislike')} title="Dislike">
-                    👎 {post.engagement?.dislikes || 0}
+                  <button onClick={() => handleEngagement(post.id, 'dislike')} title="Dislike" className="engagement-btn">
+                    <img src="/images/shaxe-dislike.png" alt="Dislike" className="engagement-icon" />
+                    <span>{post.engagement?.dislikes || 0}</span>
                   </button>
                   <div className="share-shame-container">
                     <button 
@@ -189,17 +191,21 @@ export default function Home() {
                     {showShareMenu === post.id && (
                       <div className="share-menu">
                         <button onClick={() => { handleEngagement(post.id, 'share'); setShowShareMenu(null); }}>
-                          🔄 Share ({post.engagement?.shares || 0})
+                          <img src="/images/shaxe-share.png" alt="Share" className="menu-icon" />
+                          Share ({post.engagement?.shares || 0})
                         </button>
                         <button onClick={() => { handleEngagement(post.id, 'shame'); setShowShareMenu(null); }}>
-                          😳 Shame ({post.engagement?.shames || 0})
+                          <img src="/images/shaxe-shame.png" alt="Shame" className="menu-icon" />
+                          Shame ({post.engagement?.shames || 0})
                         </button>
                       </div>
                     )}
                   </div>
-                  <button title="Comment">💬 {post.comments || 0}</button>
-                  <button onClick={() => handleEngagement(post.id, 'bookmark')} title="Bookmark">
-                    🔖
+                  <button title="Comment" className="engagement-btn">
+                    💬 <span>{post.comments || 0}</span>
+                  </button>
+                  <button onClick={() => handleEngagement(post.id, 'bookmark')} title="Bookmark" className="engagement-btn">
+                    <img src="/images/bookmark-icon.png" alt="Bookmark" className="engagement-icon" />
                   </button>
                 </div>
               </div>
