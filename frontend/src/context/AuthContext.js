@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/auth/login`,
+        `${process.env.REACT_APP_API_URL}/auth/login`,
         { email, password }
       );
       const { token, user } = response.data;
@@ -41,7 +41,7 @@ export function AuthProvider({ children }) {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/auth/signup`,
+        `${process.env.REACT_APP_API_URL}/auth/signup`,
         { email, username, password, dateOfBirth }
       );
       const { token, user } = response.data;
