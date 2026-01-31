@@ -6,13 +6,30 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
+  // Fetch user data on mount if token exists
   useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      // TODO: Validate token and fetch user data
-    }
+    const fetchUser = async () => {
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_API_URL}/auth/me`
+          );
+          setUser(response.data.user);
+        } catch (error) {
+          console.error('Failed to fetch user:', error);
+          // Token might be invalid, clear it
+          localStorage.removeItem('token');
+          setToken(null);
+          delete axios.defaults.headers.common['Authorization'];
+        }
+      }
+      setLoading(false);
+    };
+
+    fetchUser();
   }, [token]);
 
   const login = useCallback(async (email, password) => {

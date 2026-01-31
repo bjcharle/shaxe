@@ -95,6 +95,40 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// GET /api/auth/me - get current user data
+router.get('/me', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user && req.user.userId;
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      success: true,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        is_verified: user.is_verified,
+        kyc_status: user.kyc_status,
+        full_name: user.full_name,
+        bio: user.bio,
+        website: user.website,
+        profile_image_url: user.profile_image_url,
+        created_at: user.created_at,
+      },
+    });
+  } catch (error) {
+    console.error('Get current user error', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // POST /api/auth/verify-kyc (placeholder for KYC service integration)
 router.post('/verify-kyc', authenticateToken, async (req, res) => {
   try {
