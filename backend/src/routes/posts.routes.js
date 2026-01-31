@@ -88,10 +88,10 @@ router.get('/feed', async (req, res) => {
       SELECT 
         p.id, p.user_id, p.content, p.is_adult_content, p.is_shielded, p.shield_expires_at, p.created_at,
         u.username, u.is_verified,
-        COUNT(*) FILTER (WHERE e.engagement_type = 'like') as likes,
-        COUNT(*) FILTER (WHERE e.engagement_type = 'dislike') as dislikes,
-        COUNT(*) FILTER (WHERE e.engagement_type = 'share') as shares,
-        COUNT(*) FILTER (WHERE e.engagement_type = 'shame') as shames,
+        COALESCE(SUM(CASE WHEN e.engagement_type = 'like' THEN 1 ELSE 0 END), 0) as likes,
+        COALESCE(SUM(CASE WHEN e.engagement_type = 'dislike' THEN 1 ELSE 0 END), 0) as dislikes,
+        COALESCE(SUM(CASE WHEN e.engagement_type = 'share' THEN 1 ELSE 0 END), 0) as shares,
+        COALESCE(SUM(CASE WHEN e.engagement_type = 'shame' THEN 1 ELSE 0 END), 0) as shames,
         COALESCE(tc.trending_score, 0) as trending_score
       FROM posts p
       JOIN users u ON p.user_id = u.id
