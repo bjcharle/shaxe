@@ -119,13 +119,13 @@ export default function Home() {
               <div key={post.id} className="post-item">
                 <div className="post-header">
                   <div className="post-avatar">
-                    {post.username ? post.username[0].toUpperCase() : 'U'}
+                    {post.author?.username ? post.author.username[0].toUpperCase() : 'U'}
                   </div>
                   <div className="post-meta">
-                    <Link to={`/profile/${post.username}`} className="post-username">
-                      @{post.username}
+                    <Link to={`/profile/${post.author?.username}`} className="post-username">
+                      @{post.author?.username}
                     </Link>
-                    {post.is_verified && <span className="verified-badge">✓</span>}
+                    {post.author?.is_verified && <span className="verified-badge">✓</span>}
                     <span className="post-time">
                       · {new Date(post.created_at).toLocaleDateString()}
                     </span>
@@ -135,10 +135,10 @@ export default function Home() {
                   <p>{post.content}</p>
                 </div>
                 <div className="post-actions">
-                  <button title="Like">❤️ {post.likes || 0}</button>
-                  <button title="Dislike">👎 {post.dislikes || 0}</button>
+                  <button title="Like">❤️ {post.engagement?.likes || 0}</button>
+                  <button title="Dislike">👎 {post.engagement?.dislikes || 0}</button>
                   <button title="Comment">💬 {post.comments || 0}</button>
-                  <button title="Share">🔄 {post.shares || 0}</button>
+                  <button title="Share">🔄 {post.engagement?.shares || 0}</button>
                   <button title="Bookmark">🔖</button>
                 </div>
               </div>
