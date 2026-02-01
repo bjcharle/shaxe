@@ -11,7 +11,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8fafc;
+  background-color: #c0c0c0;
   color: #1e293b;
   line-height: 1.6;
 }
@@ -49,9 +49,9 @@ code {
 }
 
 .btn-secondary {
-  background: #f1f5f9;
-  color: #475569;
-  border: 1px solid #e2e8f0;
+  background: #808080;
+  color: white;
+  border: 1px solid #666666;
   padding: 12px 24px;
   border-radius: 8px;
   font-size: 16px;
@@ -64,8 +64,8 @@ code {
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
+  background: #666666;
+  border-color: #555555;
 }
 
 .error-message {
@@ -89,9 +89,9 @@ code {
 .placeholder {
   padding: 40px;
   text-align: center;
-  background: #f8fafc;
-  border: 2px dashed #e2e8f0;
+  background: #c0c0c0;
+  border: 2px dashed #999999;
   border-radius: 8px;
-  color: #64748b;
+  color: #1e293b;
   font-style: italic;
 }
