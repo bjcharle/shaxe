@@ -308,7 +308,8 @@
 }
 
 .composer-icons button:hover {
-  background: #d0d0d0;
+  background: #c0c0c0;
+  color: white;
 }
 
 /* Posts List */
@@ -318,12 +319,12 @@
 
 .post-item {
   padding: 16px 20px;
-  border-bottom: 2px solid #999999;
+  border-bottom: 2px solid #e2e8f0;
   transition: background 0.2s;
 }
 
 .post-item:hover {
-  background: #d0d0d0;
+  background: #f8fafc;
 }
 
 .post-header {
@@ -494,7 +495,7 @@
 }
 
 .btn-follow {
-  background: #808080;
+  background: #c0c0c0;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -505,7 +506,7 @@
 }
 
 .btn-follow:hover {
-  background: #666666;
+  background: #a0a0a0;
 }
 
 .show-more {
@@ -547,7 +548,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: #808080;
+  background: #c0c0c0;
   border: none;
   padding: 6px 10px;
   border-radius: 18px;
@@ -559,7 +560,7 @@
 }
 
 .engagement-btn:hover {
-  background: #666666;
+  background: #a0a0a0;
   color: white;
   transform: translateY(-1px);
 }
@@ -584,7 +585,7 @@
 }
 
 .share-shame-button {
-  background: #808080;
+  background: #c0c0c0;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -600,7 +601,7 @@
 }
 
 .share-shame-button:hover {
-  background: #666666;
+  background: #a0a0a0;
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -653,7 +654,7 @@
 }
 
 .share-menu button:hover {
-  background: #f1f5f9;
+  background: #e8e8e8;
 }
 
 .share-menu button:not(:last-child) {
