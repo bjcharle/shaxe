@@ -316,6 +316,80 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
+.post-item {
+  padding: 16px 20px;
+  border-bottom: 2px solid #e2e8f0;
+  transition: background 0.2s;
+}
+
+.post-item:hover {
+  background: #f8fafc;
+}
+
+.post-header {
+  margin-bottom: 8px;
+}
+
+.post-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8C00BF 0%, #7000A0 100%);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.post-username {
+  font-weight: 700;
+  color: #1e293b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.post-username:hover {
+  color: #8C00BF;
+}
+
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: #8C00BF;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.post-time {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.post-content {
+  color: #1e293b;
+  font-size: 15px;
+  line-height: 1.5;
+  padding-left: 0;
+}
+
+.post-content p {
+  margin: 0;
+}
+
 .empty-feed {
   padding: 60px 20px;
   text-align: center;

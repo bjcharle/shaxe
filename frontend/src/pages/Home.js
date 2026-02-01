@@ -158,16 +158,16 @@ export default function Home() {
             posts.map(post => (
               <div key={post.id} className="post-item">
                 <div className="post-header">
-                  <div className="post-avatar">
-                    {post.author?.username ? post.author.username[0].toUpperCase() : 'U'}
-                  </div>
                   <div className="post-meta">
+                    <div className="post-avatar">
+                      {post.author?.username ? post.author.username[0].toUpperCase() : 'U'}
+                    </div>
                     <Link to={`/profile/${post.author?.username}`} className="post-username">
                       @{post.author?.username}
                     </Link>
                     {post.author?.is_verified && <span className="verified-badge">✓</span>}
                     <span className="post-time">
-                      · {new Date(post.created_at).toLocaleDateString()}
+                      · {new Date(post.created_at).toLocaleDateString()} at {new Date(post.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
                 </div>
