@@ -580,6 +580,26 @@
   opacity: 1;
 }
 
+/* Favorite Button Styles */
+.favorite-btn .favorite-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.favorite-btn:hover .favorite-icon {
+  transform: scale(1.1);
+}
+
+/* Comment Button Styles */
+.comment-btn .comment-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.comment-btn:hover .comment-icon {
+  transform: scale(1.1);
+}
+
 /* Share/Shame Button Styles */
 .share-shame-container {
   position: relative;

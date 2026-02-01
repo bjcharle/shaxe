@@ -207,6 +207,14 @@ export default function Home() {
                       </div>
                     )}
                   </div>
+                  <button onClick={() => handleEngagement(post.id, 'favorite')} title="Favorite" className="engagement-btn favorite-btn">
+                    <span className="favorite-icon">❤️</span>
+                    <span>{post.engagement?.favorites || 0}</span>
+                  </button>
+                  <button onClick={() => handleEngagement(post.id, 'comment')} title="Comment" className="engagement-btn comment-btn">
+                    <span className="comment-icon">💬</span>
+                    <span>{post.engagement?.comments || 0}</span>
+                  </button>
                 </div>
               </div>
             ))
