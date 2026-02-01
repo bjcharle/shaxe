@@ -88,13 +88,34 @@ class TrendingService {
   }
 
   static async updateTrendingCache(postId) {
-    const score = await this.calculateTrendingScore(postId);
+    const result = await pool.query(`
+      SELECT 
+        COUNT(*) FILTER (WHERE engagement_type = 'like') as likes,
+        COUNT(*) FILTER (WHERE engagement_type = 'dislike') as dislikes,
+        COUNT(*) FILTER (WHERE engagement_type = 'share') as shares,
+        COUNT(*) FILTER (WHERE engagement_type = 'shame') as shames,
+        COUNT(DISTINCT user_id) as unique_engagers,
+        COUNT(*) as total_engagement
+      FROM engagement
+      WHERE post_id = $1 AND engagement_type IN ('like', 'dislike', 'share', 'shame')
+      GROUP BY post_id
+    `, [postId]);
+
+    let likes = 0, dislikes = 0, shares = 0, shames = 0, unique_engagers = 0, total_engagement = 0;
+    
+    if (result.rows.length > 0) {
+      ({ likes = 0, dislikes = 0, shares = 0, shames = 0, unique_engagers = 0, total_engagement = 0 } = result.rows[0]);
+    }
+
+    const net_sentiment = (parseInt(likes) + parseInt(shares)) - (parseInt(dislikes) + parseInt(shames));
+    const trending_score = await this.calculateTrendingScore(postId);
     
     await pool.query(`
-      INSERT INTO trending_cache (post_id, trending_score, calculated_at)
-      VALUES ($1, $2, NOW())
-      ON CONFLICT (post_id) DO UPDATE SET trending_score = $2, calculated_at = NOW()
-    `, [postId, score]);
+      INSERT INTO trending_cache (post_id, trending_score, engagement_count, unique_engagers, net_sentiment, time_decayed_score, calculated_at)
+      VALUES ($1, $2, $3, $4, $5, $6, NOW())
+      ON CONFLICT (post_id) DO UPDATE 
+      SET trending_score = $2, engagement_count = $3, unique_engagers = $4, net_sentiment = $5, time_decayed_score = $6, calculated_at = NOW()
+    `, [postId, trending_score, total_engagement, unique_engagers, net_sentiment, trending_score]);
   }
 
   static async getTrendingPosts(limit = 20, offset = 0, period = 'day') {
