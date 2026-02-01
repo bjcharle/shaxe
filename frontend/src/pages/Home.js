@@ -49,6 +49,13 @@ export default function Home() {
   const handleEngagement = async (postId, action) => {
     try {
       setError(''); // Clear any existing errors
+      
+      // For comments, navigate to post detail (not implemented yet)
+      if (action === 'comment') {
+        alert('Comment feature: Post detail page not yet implemented. Use this to navigate to /post/' + postId);
+        return;
+      }
+      
       switch (action) {
         case 'like':
           await postsService.likePost(postId);
@@ -65,6 +72,13 @@ export default function Home() {
         case 'shame':
           await postsService.shamePost(postId);
           break;
+        case 'favorite':
+          await postsService.favoritePost(postId);
+          break;
+        case 'comment':
+          // Show alert since post detail page not yet implemented
+          alert('Comment feature: Post detail page not yet implemented. Navigate to /post/' + postId + ' to view and add comments.');
+          return;
         default:
           return;
       }
