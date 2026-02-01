@@ -473,7 +473,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: transparent;
+  background: #f1f5f9;
   border: none;
   padding: 6px 10px;
   border-radius: 18px;
@@ -481,24 +481,25 @@
   transition: all 0.2s ease;
   color: #64748b;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .engagement-btn:hover {
-  background: #f1f5f9;
+  background: #e2e8f0;
   color: #A32CC4;
+  transform: translateY(-1px);
 }
 
 .engagement-icon {
   width: 22px;
   height: 22px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(30%) sepia(10%) saturate(800%) hue-rotate(180deg);
-  opacity: 0.85;
+  filter: brightness(0) saturate(100%) invert(31%) sepia(95%) saturate(2456%) hue-rotate(282deg) brightness(91%) contrast(93%);
+  opacity: 1;
 }
 
 .engagement-btn:hover .engagement-icon {
-  filter: brightness(0) saturate(100%) invert(31%) sepia(95%) saturate(2456%) hue-rotate(282deg) brightness(91%) contrast(93%);
+  filter: brightness(0) saturate(100%) invert(31%) sepia(95%) saturate(2800%) hue-rotate(282deg) brightness(95%) contrast(100%);
   opacity: 1;
 }
 
@@ -535,12 +536,12 @@
   width: 22px;
   height: 22px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(30%) sepia(10%) saturate(800%) hue-rotate(180deg);
-  opacity: 0.85;
+  filter: brightness(0) saturate(100%) invert(31%) sepia(95%) saturate(2456%) hue-rotate(282deg) brightness(91%) contrast(93%);
+  opacity: 1;
 }
 
 .share-shame-button:hover .share-icon-img {
-  filter: brightness(0) saturate(100%) invert(31%) sepia(95%) saturate(2456%) hue-rotate(282deg) brightness(91%) contrast(93%);
+  filter: brightness(0) saturate(100%) invert(31%) sepia(95%) saturate(2800%) hue-rotate(282deg) brightness(95%) contrast(100%);
   opacity: 1;
 }
 
