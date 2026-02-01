@@ -7,6 +7,7 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import KYCVerification from './components/Auth/KYCVerification';
 import Home from './pages/Home';
+import PostDetail from './pages/PostDetail';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
@@ -34,6 +35,7 @@ function AppRoutes() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/kyc-verification" element={<KYCVerification />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/post/:postId" element={<PostDetail />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/404" element={<NotFound />} />

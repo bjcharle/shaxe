@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { postsService } from '../services/posts';
 import '../styles/pages.css';
 
 export default function Home() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState('');
   const [loading, setLoading] = useState(true);
@@ -76,8 +77,8 @@ export default function Home() {
           await postsService.favoritePost(postId);
           break;
         case 'comment':
-          // Show alert since post detail page not yet implemented
-          alert('Comment feature: Post detail page not yet implemented. Navigate to /post/' + postId + ' to view and add comments.');
+          // Navigate to post detail page
+          navigate(`/post/${postId}`);
           return;
         default:
           return;
