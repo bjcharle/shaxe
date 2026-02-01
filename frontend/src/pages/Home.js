@@ -48,6 +48,7 @@ export default function Home() {
 
   const handleEngagement = async (postId, action) => {
     try {
+      setError(''); // Clear any existing errors
       switch (action) {
         case 'like':
           await postsService.likePost(postId);
@@ -71,11 +72,16 @@ export default function Home() {
       fetchPosts();
     } catch (err) {
       console.error(`Error ${action}ing post:`, err);
+      console.error('Error details:', err.response?.data);
       if (err.response?.status === 403) {
         setError('Only verified users can engage with posts');
+      } else if (err.response?.data?.error) {
+        setError(err.response.data.error);
       } else {
         setError(`Failed to ${action} post`);
       }
+      // Clear error after 5 seconds
+      setTimeout(() => setError(''), 5000);
     }
   };
 
