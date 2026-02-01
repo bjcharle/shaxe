@@ -38,15 +38,31 @@ router.post('/like/:postId', authenticateToken, async (req, res) => {
       return res.status(403).json({ error: `User is banned until ${banStatus.banUntil}` });
     }
 
-    await EngagementService.addEngagement(userId, postId, 'like');
-    
-    // Award points to user
-    await PointsEarningService.awardPointsForEngagement(userId, 'like', postId);
-    
-    // Adjust post owner's points for sentiment
-    await PointsEarningService.adjustPointsForNetSentiment(postId, 'like');
-    
-    res.json({ success: true, engagement: 'like' });
+    // Check if user already liked this post (toggle behavior)
+    const existingLike = await pool.query(
+      'SELECT * FROM engagement WHERE post_id = $1 AND user_id = $2 AND engagement_type = $3',
+      [postId, userId, 'like']
+    );
+
+    if (existingLike.rows.length > 0) {
+      // Remove like if already exists
+      await EngagementService.removeEngagement(postId, userId, 'like');
+      res.json({ success: true, action: 'removed', engagement: 'like' });
+    } else {
+      // Remove dislike if exists (exclusive behavior)
+      await EngagementService.removeEngagement(postId, userId, 'dislike');
+      
+      // Add like
+      await EngagementService.addEngagement(userId, postId, 'like');
+      
+      // Award points to user
+      await PointsEarningService.awardPointsForEngagement(userId, 'like', postId);
+      
+      // Adjust post owner's points for sentiment
+      await PointsEarningService.adjustPointsForNetSentiment(postId, 'like');
+      
+      res.json({ success: true, action: 'added', engagement: 'like' });
+    }
   } catch (error) {
     console.error('Like error', error);
     res.status(500).json({ error: error.message || 'Internal server error' });
@@ -73,15 +89,31 @@ router.post('/dislike/:postId', authenticateToken, async (req, res) => {
       return res.status(403).json({ error: `User is banned until ${banStatus.banUntil}` });
     }
 
-    await EngagementService.addEngagement(userId, postId, 'dislike');
-    
-    // Award points to user
-    await PointsEarningService.awardPointsForEngagement(userId, 'dislike', postId);
-    
-    // Adjust post owner's points for sentiment
-    await PointsEarningService.adjustPointsForNetSentiment(postId, 'dislike');
-    
-    res.json({ success: true, engagement: 'dislike' });
+    // Check if user already disliked this post (toggle behavior)
+    const existingDislike = await pool.query(
+      'SELECT * FROM engagement WHERE post_id = $1 AND user_id = $2 AND engagement_type = $3',
+      [postId, userId, 'dislike']
+    );
+
+    if (existingDislike.rows.length > 0) {
+      // Remove dislike if already exists
+      await EngagementService.removeEngagement(postId, userId, 'dislike');
+      res.json({ success: true, action: 'removed', engagement: 'dislike' });
+    } else {
+      // Remove like if exists (exclusive behavior)
+      await EngagementService.removeEngagement(postId, userId, 'like');
+      
+      // Add dislike
+      await EngagementService.addEngagement(userId, postId, 'dislike');
+      
+      // Award points to user
+      await PointsEarningService.awardPointsForEngagement(userId, 'dislike', postId);
+      
+      // Adjust post owner's points for sentiment
+      await PointsEarningService.adjustPointsForNetSentiment(postId, 'dislike');
+      
+      res.json({ success: true, action: 'added', engagement: 'dislike' });
+    }
   } catch (error) {
     console.error('Dislike error', error);
     res.status(500).json({ error: error.message || 'Internal server error' });
