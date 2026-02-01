@@ -190,11 +190,11 @@ export default function Home() {
                     </button>
                     {showShareMenu === post.id && (
                       <div className="share-menu">
-                        <button onClick={() => { handleEngagement(post.id, 'share'); setShowShareMenu(null); }}>
+                        <button onClick={() => { handleEngagement(post.id, 'share'); setShowShareMenu(null); }} title="Share this post">
                           <img src="/images/shaxe-share.png" alt="Share" className="menu-icon" />
                           <span>{post.engagement?.shares || 0}</span>
                         </button>
-                        <button onClick={() => { handleEngagement(post.id, 'shame'); setShowShareMenu(null); }}>
+                        <button onClick={() => { handleEngagement(post.id, 'shame'); setShowShareMenu(null); }} title="Shame this post">
                           <img src="/images/shaxe-shame.png" alt="Shame" className="menu-icon" />
                           <span>{post.engagement?.shames || 0}</span>
                         </button>
