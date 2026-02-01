@@ -51,12 +51,6 @@ export default function Home() {
     try {
       setError(''); // Clear any existing errors
       
-      // For comments, navigate to post detail (not implemented yet)
-      if (action === 'comment') {
-        alert('Comment feature: Post detail page not yet implemented. Use this to navigate to /post/' + postId);
-        return;
-      }
-      
       switch (action) {
         case 'like':
           await postsService.likePost(postId);
