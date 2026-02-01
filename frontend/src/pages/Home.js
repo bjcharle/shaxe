@@ -192,21 +192,15 @@ export default function Home() {
                       <div className="share-menu">
                         <button onClick={() => { handleEngagement(post.id, 'share'); setShowShareMenu(null); }}>
                           <img src="/images/shaxe-share.png" alt="Share" className="menu-icon" />
-                          Share ({post.engagement?.shares || 0})
+                          <span>{post.engagement?.shares || 0}</span>
                         </button>
                         <button onClick={() => { handleEngagement(post.id, 'shame'); setShowShareMenu(null); }}>
                           <img src="/images/shaxe-shame.png" alt="Shame" className="menu-icon" />
-                          Shame ({post.engagement?.shames || 0})
+                          <span>{post.engagement?.shames || 0}</span>
                         </button>
                       </div>
                     )}
                   </div>
-                  <button title="Comment" className="engagement-btn">
-                    💬 <span>{post.comments || 0}</span>
-                  </button>
-                  <button onClick={() => handleEngagement(post.id, 'bookmark')} title="Bookmark" className="engagement-btn">
-                    <img src="/images/bookmark-icon.png" alt="Bookmark" className="engagement-icon" />
-                  </button>
                 </div>
               </div>
             ))
