@@ -23,7 +23,7 @@
 .nav-logo {
   font-size: 24px;
   font-weight: bold;
-  color: #A32CC4;
+  color: #8C00BF;
   text-decoration: none;
 }
 
@@ -37,12 +37,12 @@
   width: 28px;
   height: 28px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(31%) sepia(95%) saturate(2456%) hue-rotate(282deg) brightness(91%) contrast(93%);
+  filter: brightness(0) saturate(100%) invert(24%) sepia(98%) saturate(5000%) hue-rotate(282deg) brightness(90%) contrast(120%);
   margin-right: -2px;
 }
 
 .logo-text-old {
-  background: linear-gradient(135deg, #A32CC4 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, #8C00BF 0%, #7000A0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -64,7 +64,7 @@
 }
 
 .nav-link:hover {
-  color: #A32CC4;
+  color: #8C00BF;
   background: #f8fafc;
 }
 
