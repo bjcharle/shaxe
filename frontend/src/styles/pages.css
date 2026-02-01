@@ -590,8 +590,13 @@
   width: 20px;
   height: 20px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(30%) sepia(10%) saturate(800%) hue-rotate(180deg);
-  opacity: 0.85;
+  filter: brightness(0) saturate(100%) invert(24%) sepia(98%) saturate(5000%) hue-rotate(282deg) brightness(90%) contrast(120%);
+  opacity: 1;
+}
+
+.share-menu button:hover .menu-icon {
+  filter: brightness(0) saturate(100%) invert(24%) sepia(98%) saturate(5500%) hue-rotate(282deg) brightness(95%) contrast(125%);
+  opacity: 1;
 }
 
 .engagement-btn {
